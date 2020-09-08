@@ -1,15 +1,33 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { connect } from "react-redux"
 import { setData, setCard } from "redux/dashboard/dashboardActions"
 import { useHistory } from "react-router-dom"
+const faker = require("faker")
 
 const EditCard = (props) => {
   const { setData, data, card, setCard } = props
-  const [info, setInfo] = useState(card)
+  const { id } = props.match.params
+
+  const [info, setInfo] = useState({
+    id: "",
+    title: "",
+    description: "",
+    priority: "low",
+    category: "todo",
+  })
   const history = useHistory()
+
+  useEffect(() => {
+    if (card !== null) setInfo(card)
+  }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault()
+
+    if (id === "new") {
+      handleAddCard()
+      return
+    }
 
     let tempData = { ...data }
     let List = data[info.category].filter((el) => el.id !== info.id)
@@ -21,6 +39,14 @@ const EditCard = (props) => {
     history.push("/")
   }
 
+  const handleAddCard = () => {
+    let tempData = { ...data }
+    info.id = faker.random.uuid()
+    tempData["todo"].push(info)
+    setData(tempData)
+    history.push("/")
+  }
+
   return (
     <div className="p-4">
       <div className="row">
@@ -28,7 +54,7 @@ const EditCard = (props) => {
           className="col-md d-flex justify-content-center align-items-center flex-column"
           style={{ height: 80 + "vh" }}
         >
-          <h3>EDIT CARD</h3> <br />
+          <h3>{id === "new" ? "NEW" : "EDIT"} CARD</h3> <br />
           <form
             onSubmit={(e) => handleSubmit(e)}
             style={{ width: 50 + "vw" }}
