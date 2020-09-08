@@ -39,6 +39,7 @@ const Dashboard = (props) => {
       <div className="row">
         <div className="col-md text-center">
           <h3>DASHBOARD</h3>
+          <br />
         </div>
       </div>
       <br />

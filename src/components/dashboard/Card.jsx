@@ -63,7 +63,7 @@ const Card = (props) => {
           <span className="material-icons">delete</span>
         </BtnDelete>
 
-        <p className="card-text">{info.description} lore</p>
+        <p className="card-text">{info.description}</p>
         <Btn href="#" className="badge float-right" priority={info.priority}>
           {info.priority}
         </Btn>

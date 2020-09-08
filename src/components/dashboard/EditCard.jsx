@@ -111,7 +111,11 @@ const EditCard = (props) => {
                 Please select a valid state.
               </div>
             </div>
-            <button type="submit" className="btn btn-primary mt-5">
+            <button
+              disabled={!info.title || !info.description}
+              type="submit"
+              className="btn btn-primary mt-5"
+            >
               save
             </button>
           </form>
