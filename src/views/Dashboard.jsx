@@ -1,27 +1,26 @@
 import React from "react"
 import CardList from "components/dashboard/CardList"
 import { connect } from "react-redux"
-import { setData } from "redux/dashboard/dashboardActions"
+import { setData, setCard } from "redux/dashboard/dashboardActions"
 
 const Dashboard = (props) => {
-  const { setData, data } = props
+  const { setData, data, card } = props
 
   const onDropHandler = (e, category) => {
     e.preventDefault()
-    let item = JSON.parse(localStorage.getItem("item"))
+
     let newData = { ...data }
-    newData[item.category] = newData[item.category].filter(
-      (el) => el.id !== item.id
+    newData[card.category] = newData[card.category].filter(
+      (el) => el.id !== card.id
     )
 
-    item.category = category
-    newData[category].push(item)
+    card.category = category
+    newData[category].push(card)
     setData(newData)
+    setCard(null)
   }
 
-  const onDragOver = (e) => {
-    e.preventDefault()
-  }
+  const onDragOver = (e) => e.preventDefault()
 
   return (
     <div className="p-4">
@@ -57,6 +56,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   setData: (data) => dispatch(setData(data)),
+  setCard: (card) => dispatch(setCard(card)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)
