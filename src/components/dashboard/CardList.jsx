@@ -1,9 +1,20 @@
 import React from "react"
 import Card from "./Card"
 
-const CardList = ({ list = [] }) => {
+const colors = {
+  todo: "secondary",
+  inprogress: "warning",
+  done: "success",
+}
+
+const CardList = ({ list = [], title, category }) => {
   return (
     <div>
+      <h5
+        className={`"mt-4 border-bottom pb-2 border-${colors[category]} text-secondary"`}
+      >
+        {title}
+      </h5>
       {list.map((item) => (
         <Card key={item.id} info={item} />
       ))}
