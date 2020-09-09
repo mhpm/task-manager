@@ -4,6 +4,7 @@ import { connect } from "react-redux"
 import { setData, setCard } from "redux/dashboard/dashboardActions"
 import styled from "styled-components"
 import { Link } from "react-router-dom"
+import Progress from "components/Progress"
 
 const BtnAdd = styled(Link)`
   position: fixed;
@@ -53,19 +54,7 @@ const Dashboard = (props) => {
           <h3>DASHBOARD</h3>
         </div>
       </div>
-      Progress
-      <div className="progress" style={{ height: 20 }}>
-        <div
-          className={`progress-bar ${progress == 100 ? "bg-success" : ""}`}
-          role="progressbar"
-          style={{ width: progress + "%" }}
-          aria-valuenow="25"
-          aria-valuemin="0"
-          aria-valuemax="100"
-        >
-          {progress}%
-        </div>
-      </div>
+      <Progress progress={progress} />
       <br />
       <div
         className="row"
