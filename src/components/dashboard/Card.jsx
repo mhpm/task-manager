@@ -48,6 +48,7 @@ const Card = (props) => {
   return (
     <CardStyled
       draggable
+      onTouchStart={() => setCard(info)}
       onDragStart={() => setCard(info)}
       className="card mt-3 shadow-sm"
       priority={info.priority}

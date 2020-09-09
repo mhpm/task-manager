@@ -47,19 +47,23 @@ const EditCard = (props) => {
     history.push("/")
   }
 
+  function getTitle() {
+    let title = id === "new" ? "NEW" : "EDIT"
+    return <h3 className="text-center"> {title} CARD</h3>
+  }
+
   return (
-    <div className="p-4">
-      <div className="row">
-        <div
-          className="col-md d-flex justify-content-center align-items-center flex-column"
-          style={{ height: 80 + "vh" }}
-        >
-          <h3>{id === "new" ? "NEW" : "EDIT"} CARD</h3> <br />
+    <div>
+      <div
+        className="row m-0 justify-content-center align-items-center"
+        style={{ height: 90 + "vh" }}
+      >
+        <div className="col-sm col-md-7 col-lg-5">
           <form
             onSubmit={(e) => handleSubmit(e)}
-            style={{ width: 50 + "vw" }}
-            className="card p-5"
+            className="card p-5 shadow-sm border-0"
           >
+            {getTitle()} <br />
             <div className="form-group">
               <label>Title</label>
               <input
@@ -114,7 +118,7 @@ const EditCard = (props) => {
             <button
               disabled={!info.title || !info.description}
               type="submit"
-              className="btn btn-primary mt-5"
+              className="btn btn-primary btn-lg mt-4 rounded-pill"
             >
               save
             </button>

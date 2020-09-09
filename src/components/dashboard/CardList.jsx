@@ -9,7 +9,7 @@ const colors = {
 
 const CardList = ({ list = [], title, category }) => {
   return (
-    <div>
+    <div className="mt-4">
       <h5
         className={`"mt-4 border-bottom pb-2 border-${colors[category]} text-secondary"`}
       >

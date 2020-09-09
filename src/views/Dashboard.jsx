@@ -5,10 +5,10 @@ import { setData, setCard } from "redux/dashboard/dashboardActions"
 import styled from "styled-components"
 import { Link } from "react-router-dom"
 
-const BtnAdd = styled.button`
+const BtnAdd = styled(Link)`
+  position: fixed;
   width: 80px;
   height: 80px;
-  position: absolute;
   bottom: 30px;
   right: 30px;
   font-size: 40px;
@@ -39,11 +39,14 @@ const Dashboard = (props) => {
       <div className="row">
         <div className="col-md text-center">
           <h3>DASHBOARD</h3>
-          <br />
         </div>
       </div>
       <br />
-      <div className="row" onDragOver={(e) => onDragOver(e)}>
+      <div
+        className="row"
+        style={{ minHeight: 80 + "vh" }}
+        onDragOver={(e) => onDragOver(e)}
+      >
         <div className="col-md" onDrop={(e) => onDropHandler(e, "todo")}>
           <CardList list={data.todo} title="TO DO" category="todo" />
         </div>
@@ -58,14 +61,13 @@ const Dashboard = (props) => {
           <CardList list={data.done} title="DONE" category="done" />
         </div>
       </div>
-      <Link to={"/card/new"}>
-        <BtnAdd
-          onClick={() => setCard(null)}
-          className="btn btn-info btn-sm rounded-circle"
-        >
-          +
-        </BtnAdd>
-      </Link>
+      <BtnAdd
+        to={"/card/new"}
+        onClick={() => setCard(null)}
+        className="btn btn-info btn-sm rounded-circle shadow pt-2"
+      >
+        <span>+</span>
+      </BtnAdd>
     </div>
   )
 }
