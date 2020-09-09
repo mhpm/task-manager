@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import CardList from "components/dashboard/CardList"
 import { connect } from "react-redux"
 import { setData, setCard } from "redux/dashboard/dashboardActions"
@@ -17,6 +17,18 @@ const BtnAdd = styled(Link)`
 
 const Dashboard = (props) => {
   const { setData, data, card, setCard } = props
+  const [progress, setProgress] = useState(0)
+
+  const getProgress = () => {
+    const { todo, inprogress, done } = data
+    let total = todo.length + inprogress.length + done.length
+    let average = (done.length / total) * 100
+    setProgress(Math.trunc(average))
+  }
+
+  useEffect(() => {
+    getProgress()
+  }, [data])
 
   const onDropHandler = (e, category) => {
     e.preventDefault()
@@ -39,6 +51,19 @@ const Dashboard = (props) => {
       <div className="row">
         <div className="col-md text-center">
           <h3>DASHBOARD</h3>
+        </div>
+      </div>
+      Progress
+      <div className="progress" style={{ height: 20 }}>
+        <div
+          className={`progress-bar ${progress == 100 ? "bg-success" : ""}`}
+          role="progressbar"
+          style={{ width: progress + "%" }}
+          aria-valuenow="25"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        >
+          {progress}%
         </div>
       </div>
       <br />

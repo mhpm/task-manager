@@ -2,8 +2,11 @@ import React from "react"
 
 const Header = ({ title }) => {
   return (
-    <nav class="navbar text-light navbar-dark bg-dark" style={{ height: 70 }}>
-      <span class="navbar-brand mb-0"> {title}</span>
+    <nav
+      className="navbar text-light navbar-dark bg-dark"
+      style={{ height: 70 }}
+    >
+      <span className="navbar-brand mb-0"> {title}</span>
     </nav>
   )
 }
