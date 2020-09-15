@@ -14,7 +14,7 @@ const theme = {
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" style={{ paddingBottom: 100 }}>
       <ThemeProvider theme={theme}>
         <Header title="Task Manager" />
         <Switch>

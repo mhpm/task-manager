@@ -5,6 +5,8 @@ import { connect } from "react-redux"
 import { setCard, updateDataStartAsync } from "redux/data/dataActions"
 
 const CardStyled = styled.div`
+  border-radius: 10px;
+
   ${(props) =>
     props.priority &&
     css`
@@ -23,14 +25,14 @@ const Btn = styled.span`
 
 const BtnEdit = styled.div`
   position: absolute;
-  top: 0;
-  right: 30px;
+  top: 5px;
+  right: 32px;
   color: gray;
 `
 const BtnDelete = styled.div`
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 5px;
+  right: 7px;
   color: gray;
 `
 
@@ -54,7 +56,14 @@ const Card = (props) => {
       priority={info.priority}
     >
       <div className="card-body">
-        <h5 className="card-title">{info.title}</h5>
+        <div className="row">
+          <div className="col-10">
+            <h6 className="card-title font-weight-bolder text-dark">
+              {info.title}
+            </h6>
+          </div>
+          <div className="col-2"></div>
+        </div>
         <Link to={"/card/" + info.id}>
           <BtnEdit onClick={() => setCard(info)} className="btn float-right">
             <i class="fas fa-edit"></i>
@@ -64,7 +73,7 @@ const Card = (props) => {
           <i class="fas fa-trash"></i>
         </BtnDelete>
 
-        <p className="card-text">{info.description}</p>
+        <p className="card-text text-muted">{info.description}</p>
         <Btn href="#" className="badge float-right" priority={info.priority}>
           {info.priority}
         </Btn>
