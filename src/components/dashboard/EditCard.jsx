@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { connect } from "react-redux"
-import { setData, setCard } from "redux/dashboard/dashboardActions"
+import { updateDataStartAsync, setCard } from "redux/data/dataActions"
 import { useHistory } from "react-router-dom"
 const faker = require("faker")
 
@@ -33,6 +33,7 @@ const EditCard = (props) => {
     let List = data[info.category].filter((el) => el.id !== info.id)
     List.push(info)
     tempData[info.category] = List
+
     setData(tempData)
     setCard(null)
 
@@ -130,12 +131,12 @@ const EditCard = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-  data: state.dashboard.data,
-  card: state.dashboard.card,
+  data: state.cardList.data,
+  card: state.cardList.card,
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  setData: (data) => dispatch(setData(data)),
+  setData: (data) => dispatch(updateDataStartAsync(data)),
   setCard: (card) => dispatch(setCard(card)),
 })
 

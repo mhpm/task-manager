@@ -1,0 +1,7 @@
+const DataActionTypes = {
+  UPDATE_DATA_START: "UPDATE_DATA_START",
+  UPDATE_DATA_SUCCESS: "UPDATE_DATA_SUCCESS",
+  UPDATE_DATA_FAILURE: "UPDATE_DATA_FAILURE",
+}
+
+export default DataActionTypes

@@ -6,7 +6,7 @@ const Progress = ({ progress }) => {
       Progress
       <div className="progress" style={{ height: 20 }}>
         <div
-          className={`progress-bar ${progress == 100 ? "bg-success" : ""}`}
+          className={`progress-bar ${progress === 100 ? "bg-success" : ""}`}
           role="progressbar"
           style={{ width: progress + "%" }}
           aria-valuenow="25"

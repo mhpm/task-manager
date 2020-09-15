@@ -2,7 +2,7 @@ import React from "react"
 import styled, { css } from "styled-components"
 import { Link } from "react-router-dom"
 import { connect } from "react-redux"
-import { setCard, setData } from "redux/dashboard/dashboardActions"
+import { setCard, updateDataStartAsync } from "redux/data/dataActions"
 
 const CardStyled = styled.div`
   ${(props) =>
@@ -35,14 +35,14 @@ const BtnDelete = styled.div`
 `
 
 const Card = (props) => {
-  const { info, setCard, data, setData } = props
+  const { info, setCard, data, updateData } = props
 
   const hanleDelete = () => {
     let tempData = { ...data }
     let list = data[info.category].filter((el) => el.id !== info.id)
 
     tempData[info.category] = list
-    setData(tempData)
+    updateData(tempData)
   }
 
   return (
@@ -57,11 +57,11 @@ const Card = (props) => {
         <h5 className="card-title">{info.title}</h5>
         <Link to={"/card/" + info.id}>
           <BtnEdit onClick={() => setCard(info)} className="btn float-right">
-            <span className="material-icons">create</span>
+            <i class="fas fa-edit"></i>
           </BtnEdit>
         </Link>
         <BtnDelete onClick={hanleDelete} className="btn float-right">
-          <span className="material-icons">delete</span>
+          <i class="fas fa-trash"></i>
         </BtnDelete>
 
         <p className="card-text">{info.description}</p>
@@ -74,11 +74,11 @@ const Card = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-  data: state.dashboard.data,
+  data: state.cardList.data,
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  setData: (data) => dispatch(setData(data)),
+  updateData: (data) => dispatch(updateDataStartAsync(data)),
   setCard: (card) => dispatch(setCard(card)),
 })
 

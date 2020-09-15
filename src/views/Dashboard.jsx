@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import CardList from "components/dashboard/CardList"
 import { connect } from "react-redux"
-import { setData, setCard } from "redux/dashboard/dashboardActions"
+import { updateDataStartAsync, setCard } from "redux/data/dataActions"
 import styled from "styled-components"
 import { Link } from "react-router-dom"
 import Progress from "components/Progress"
@@ -17,8 +17,12 @@ const BtnAdd = styled(Link)`
 `
 
 const Dashboard = (props) => {
-  const { setData, data, card, setCard } = props
+  const { setData, setCard, data, card } = props
   const [progress, setProgress] = useState(0)
+
+  useEffect(() => {
+    getProgress()
+  }, [data])
 
   const getProgress = () => {
     const { todo, inprogress, done } = data
@@ -26,10 +30,6 @@ const Dashboard = (props) => {
     let average = (done.length / total) * 100
     setProgress(Math.trunc(average))
   }
-
-  useEffect(() => {
-    getProgress()
-  }, [data])
 
   const onDropHandler = (e, category) => {
     e.preventDefault()
@@ -87,12 +87,12 @@ const Dashboard = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-  data: state.dashboard.data,
-  card: state.dashboard.card,
+  data: state.cardList.data,
+  card: state.cardList.card,
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  setData: (data) => dispatch(setData(data)),
+  setData: (data) => dispatch(updateDataStartAsync(data)),
   setCard: (card) => dispatch(setCard(card)),
 })
 
